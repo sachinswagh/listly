@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>List Name:</strong>
+  <%= @list.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @list.description %>
+</p>
+
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', lists_path %>
+
+
+<hr>
+
+<h2>List Items</h2>
+
+<% if items_are_present?(@list) %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Sr.</th>
+        <th>Name</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @list.list_items.each_with_index do |list_item, i| %>
+        <tr>
+          <td><%= (i+1) %></td>
+          <td><%= list_item.name %></td>
+          <td><%#= link_to 'Destroy', list_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3> This list is empty. </h3>
+<% end %>
+
+<br>

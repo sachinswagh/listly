@@ -1,0 +1,36 @@
+<%= nested_form_for @list do |form| %>
+  <% if list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(list.errors.count, "error") %> prohibited this list from being saved:</h2>
+      <ul>
+      <% list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <hr>
+  <br>
+
+  <%= form.fields_for :list_items do |lif| %>
+    <%= lif.text_field :name, placeholder: 'Type Item Name' %>
+    <%= lif.link_to_remove "Remove this list_item" %>
+  <% end %>
+
+  <p><%= form.link_to_add "Add a list_item", :list_items %></p>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
