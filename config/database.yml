@@ -5,13 +5,18 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  encoding: utf8
+  reconnect: false
 
 development:
   <<: *default
   database: db/listly_development
+  host: 127.0.0.1
+  username: postgres
+  password: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,6 +26,6 @@ test:
   database: db/listly_test
 
 production:
-  <<: *default
   adapter: postgresql
-  database: db/listly_production
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: db/listlyapp_production
